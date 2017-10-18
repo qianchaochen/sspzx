@@ -1,6 +1,0 @@
-##################################
-BAIDU_API_VERSION=5.2.0
-baidu_privateKey_path=/baidu_privkey.pem
-baidu_accessKey=HWC0GSVPRIIQCV4Y
-baidu_req_ad_uri=/api_5
-##################################

@@ -1,9 +1,0 @@
-###################################
-#ES Client Settings 
-###################################
-#cluster.name=my-application
-cluster.name=test1
-client.transport.sniff=true
-name=name
-###################################
-es.hostandports=10.117.187.36:9300
