@@ -1,0 +1,162 @@
+{
+    "mappings": {
+        "campaign": {
+            "properties": {
+                "advertising_times": {
+                    "type": "integer",
+                    "store": "true"
+                },
+                "areas": {
+                    "type": "integer",
+                    "store": "true",
+                    "index": "not_analyzed"
+                },
+                "campaign_id": {
+                    "type": "integer",
+                    "store": "true"
+                },
+                "campaign_target": {
+                    "type": "integer",
+                    "store": "true"
+                },
+                "carriers": {
+                    "type": "integer",
+                    "store": "true"
+                },
+				"priority": {
+                    "type": "integer",
+                    "store": "true"
+                },
+				"ipush_limit": {
+                    "type": "integer",
+                    "store": "true"
+                },
+                "connection_type": {
+                    "type": "integer",
+                    "store": "true"
+                },
+				"bundle": {
+                            "type": "string",
+                            "store": "true",
+                            "index": "not_analyzed"
+                        },
+                "creatives": {
+					"type": "nested",
+                    "properties": {
+                        "creative_id": {
+                            "type": "integer",
+                            "store": "true"
+                        },
+                        "h": {
+                            "type": "integer",
+                            "store": "true"
+                        },
+                        "img_url": {
+                            "type": "string",
+                            "store": "true",
+                            "index": "not_analyzed"
+                        },
+                        "w": {
+                            "type": "integer",
+                            "store": "true"
+                        },
+                        "title_len": {
+                            "type": "integer",
+                            "store": "true"
+                        },
+                        "sub_title_len": {
+                            "type": "integer",
+                            "store": "true"
+                        },
+                        "title": {
+                            "type": "string",
+                            "store": "true",
+                            "index": "not_analyzed"
+                        },
+                        "subtitle": {
+                            "type": "string",
+                            "store": "true",
+                            "index": "not_analyzed"
+                        },
+                        "source": {
+                            "type": "string",
+                            "store": "true",
+                            "index": "not_analyzed"
+                        },
+                        "icon": {
+                            "type": "string",
+                            "store": "true",
+                            "index": "not_analyzed"
+                        },
+                        "iconaction": {
+                            "type": "string",
+                            "store": "true",
+                            "index": "not_analyzed"
+                        }
+                    }
+                },
+                "ad_type": {
+                    "type": "integer",
+                    "store": "true"
+                },
+                "end_time": {
+                    "type": "long",
+                    "store": "true"
+                },
+                "imptracker": {
+                    "type": "string",
+                    "store": "true",
+                    "index": "not_analyzed"
+                },
+				"clktracker": {
+                    "type": "string",
+                    "store": "true",
+                    "index": "not_analyzed"
+                },
+                "landing_url": {
+                    "type": "string",
+                    "store": "true",
+                    "index": "not_analyzed"
+                },
+                "models": {
+                    "type": "string",
+                    "store": "true",
+                    "index": "not_analyzed"
+                },
+                "os": {
+                    "type": "integer",
+                    "store": "true"
+                },
+                "osv": {
+                    "properties": {
+                        "max_ver": {
+                            "type": "integer",
+                            "store": "true"
+                        },
+                        "min_ver": {
+                            "type": "integer",
+                            "store": "true"
+                        }
+                    }
+                },
+                "start_time": {
+                    "type": "long",
+                    "store": "true"
+                },
+                "status": {
+                    "type": "integer",
+                    "store": "true"
+                },
+                "item_type": {
+                    "type": "integer",
+                    "store": "true"
+                },
+                "group_id": {
+                    "type": "string",
+                    "store": "true",
+                    "index": "not_analyzed"
+                }
+            }
+        }
+    }
+}

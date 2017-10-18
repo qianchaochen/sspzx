@@ -1,0 +1,172 @@
+
+
+.m-spread * {
+	margin: 0;
+	padding: 0;
+}
+.m-spread{
+	margin: 0 15px 5px;
+}
+
+.m-spread em {
+	font-style: normal;
+}
+
+.m-spread .u-title {
+	color: #585858;
+	font-size: 16px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.m-spread .sub-title {
+	color: #585858;
+	font-size: 12px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.m-spread .u-title a {
+	color: #585858;
+}
+
+.m-spread .sub-title a {
+	color: #585858;
+}
+
+.m-spread .u-title span {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 100%;
+	display: block;
+	float: left;
+}
+
+.m-spread .sub-title span {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 100%;
+	display: block;
+	float: left;
+}
+
+.m-spread .ad-icon {
+	display: inline-block;
+	border: 1px solid #C9C9C9;
+	color: #C9C9C9;
+	font-size: 12px;
+	text-align: center;
+	border-radius: 3px;
+	padding: 0 5px;
+	height: 20px;
+	line-height: 20px;
+	margin-left: 20px;
+}
+
+.m-spread .img {
+	margin: 0 auto;
+	display: block;
+	width: 100%;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	line-height: 0;
+}
+
+.m-spread .min {
+	height: 100%;
+	position: relative;
+	zoom: 1;
+}
+
+.m-spread .min:after {
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+	font-size: 0;
+	line-height: 0;
+}
+
+.m-spread .info {
+	width: 55%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.m-spread .info .u-title {
+	position: absolute;
+	left: 0;
+	top: 10%;
+}
+
+.m-spread .info .sub-title {
+	position: absolute;
+	left: 0;
+	bottom: 10%;
+}
+
+.m-spread .min .img {
+	float: right;
+	width: 40%;
+}
+
+.m-spread .max .u-title {
+	margin-bottom: 10px;
+}
+
+.group-img{
+	zoom: 1;
+
+}
+.group-img:after {
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+	font-size: 0;
+	line-height: 0;
+}
+
+
+.m-spread .group-img .img{
+	width: 30%;
+	display: inline-block;
+	float: left;
+	margin: 1.6666%;
+
+}
+.m-spread .img {
+	position: relative;
+	color: #fff;
+	max-height: 300px;
+	overflow: hidden;
+}
+.m-spread .img .icon{
+	display: block;
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+	font-size: 12px;
+	z-index: 3;
+	background: rgba(0, 0, 0, 0.3);
+	line-height: 14px;
+	padding: 2px;
+}
+.m-spread .download-btn{
+	text-decoration: none;
+	margin: 10px 0;
+	padding: 5px 0;
+	text-align: center;
+	width: 100%;
+	color: #fff;
+	background: #FF9000;
+	display: block;
+	border-radius: 5px;
+}

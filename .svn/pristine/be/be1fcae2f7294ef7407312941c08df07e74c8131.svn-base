@@ -1,0 +1,178 @@
+package com.gionee.ssp.service.push.rsp.impl;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+
+import com.gionee.ssp.service.image.ImageMd5Service;
+import com.gionee.ssp.service.push.rsp.PushConvertRspService;
+import com.gionee.ssp.service.wk.impl.BaseTrackerServiceImpl;
+import com.gionee.ssp.thread.image.ImageUrlQueue;
+import com.google.protobuf.ByteString;
+import com.wk.model.adx.AdmVO;
+import com.wk.model.adx.WKSSP.Ad;
+import com.wk.model.adx.WKSSP.CreativeType;
+import com.wk.model.adx.WKSSP.InteractionType;
+import com.wk.model.adx.WKSSP.WKSSPResponse;
+import com.wk.ssp.mvc.Constant;
+import com.wk.ssp.mvc.ipush.es.vo.CampaignVO;
+import com.wk.ssp.mvc.ipush.es.vo.CreativeVO;
+import com.wk.ssp.mvc.ipush.es.vo.QueryVO;
+import com.wk.ssp.mvc.toutiao.JinritoutiaoProto.BidResponse;
+import com.wk.ssp.utils.GeneratorUtils;
+import com.wk.ssp.utils.JsonUtils;
+import com.wk.ssp.utils.MacroSubstituionUtils;
+import com.wk.ssp.utils.log.WKLogManager;
+import com.wk.ssp.vo.sdk.SdkRequestVO;
+
+/**直投广告请求转换
+ * @author dingyw
+ *
+ * 2017年9月7日
+ */
+@Service
+public class PushConvertRspServiceImpl extends BaseTrackerServiceImpl implements PushConvertRspService{
+	
+	/**
+	 * 图片MD5服务层
+	 */
+	@Autowired
+	ImageMd5Service imageMd5Service;
+	
+	
+    /**
+     * 将竞价查询结果和查询条件转换成{@link BidResponse}实例返回
+     * 
+     * @param campaignVO 竞价查询的结果
+     * @param queryVO 竞价查询条件
+     * @param bidrequestId 竞价{@code Id}
+     * @return 返回{@link BidResponse}实例
+     * @throws Exception 抛出异常
+     */
+    public WKSSPResponse convertRsp(final List<CampaignVO> campaignVOs,
+            final QueryVO queryVO, final SdkRequestVO requestVO, final String requestId) throws Exception {
+
+    	WKSSPResponse.Builder builder = WKSSPResponse.newBuilder();
+
+        if (ObjectUtils.isEmpty(campaignVOs)) {
+            builder.setCode(6);
+            builder.setMsg(ByteString.copyFrom("no content".getBytes(Constant.CHARSET)));
+        } else {
+
+            builder.setCode(0);
+
+            int impId = 1;
+            for (CampaignVO campaignVO : campaignVOs) {
+
+            	//FIXME 增加对demo的处理
+            	if(!"com.gionee.ad.demo".equals(campaignVO.getBundle())){
+                WKLogManager.getLOG().addReqAdLog("campaign_id", campaignVO.getCampaign_id() + "");
+                WKLogManager.getLOG().addReqAdLog("creative_id", campaignVO.getCreatives()[0].getCreative_id() + "");
+            	}
+                CreativeVO creativeVO = campaignVO.getCreatives()[0];
+                int campaign_id = campaignVO.getCampaign_id();
+
+                Ad.Builder adBuilder = Ad.newBuilder();
+                adBuilder.setAdslotId(String.valueOf(queryVO.getAdslot())); // 广告位id
+                adBuilder.setCreativeType(CreativeType.valueOf(0)); // 创意类型--暂时未使用--默认为0
+                adBuilder.setBundle(campaignVO.getBundle()); // 下载类广告
+                adBuilder.setW(creativeVO.getW()); // 素材宽度
+                adBuilder.setH(creativeVO.getH()); // 岁才高度
+
+                // 展示监播
+                if (!StringUtils.isBlank(campaignVO.getImptracker())) {
+                    adBuilder.addImptrackers(
+                            MacroSubstituionUtils.macroSubstitutionMMA(campaignVO.getImptracker(), queryVO));
+                }
+                //FIXME 增加对demo的处理
+                if(!"com.gionee.ad.demo".equals(campaignVO.getBundle())){
+                String ipushImpUrl = GeneratorUtils.generateDetecting(this.dealTrackerUrl(imp_tracker_url), requestVO,
+                        requestId, "&campaign_id=" + campaign_id + "&ipush=1&imp_id=" + impId+"&mode="+campaignVO.getMode());
+                adBuilder.addImptrackers(ipushImpUrl);
+                }
+                // 点击监播
+                if (!StringUtils.isBlank(campaignVO.getClktracker())) {
+                    adBuilder.addClktrackers(
+                            MacroSubstituionUtils.macroSubstitutionMMA(campaignVO.getClktracker(), queryVO));
+                }
+                //FIXME 增加对demo的处理
+                if(!"com.gionee.ad.demo".equals(campaignVO.getBundle())){
+                String ipushClickUrl = GeneratorUtils.generateDetecting(this.dealTrackerUrl(click_tracker_url), requestVO,
+                        requestId, "&campaign_id=" + campaign_id + "&ipush=1&imp_id=" + impId+"&mode="+campaignVO.getMode());
+                adBuilder.addClktrackers(ipushClickUrl); // 点击追踪地址
+                }
+                adBuilder.setInteractionType(InteractionType.valueOf(campaignVO.getCampaign_target())); // 活动目标
+
+                // 广告模板---start
+                AdmVO adm = new AdmVO();
+                if (StringUtils.isEmpty(creativeVO.getIcon())) {
+                adm.setIcon(Arrays.asList(StringUtils.split(creativeVO.getImg_url(), ",")).get(0));
+                } else {
+                adm.setIcon(creativeVO.getIcon());
+                }
+                adm.setIconaction(creativeVO.getIconaction());
+                if (!StringUtils.isEmpty(creativeVO.getImg_url())) {
+                	//处理直投广告的md5,如果没有, 则该素材不返回
+//                	handleMd5(creativeVO.getImg_url(), adm);
+                	//modified by zhengk 由于测试反馈直投广告没有图片返回，发现这个地方有疑问，所以直投去掉MD5设置
+                	List<String> imgUrls = Arrays.asList(StringUtils.split(creativeVO.getImg_url(), ","));
+                	adm.setImgurl(imgUrls);
+                } else {
+                    adm.setImgurl(new ArrayList<>());
+                    adm.setImgmd5(new ArrayList<>());
+                }
+                adm.setLandingurl(campaignVO.getLanding_url());
+                adm.setSource(creativeVO.getSource());
+                adm.setTitle(creativeVO.getTitle());
+                adm.setSubtitle(creativeVO.getSubtitle());
+                adm.setItemType(campaignVO.getItem_type());
+
+                adBuilder.setAdm(JsonUtils.writeObject2Json(adm));
+                // 广告模板---end
+                builder.addAds(adBuilder.build());
+
+                impId++;
+            }
+            builder.setAd(builder.getAds(0));
+        }
+
+        return builder.build();
+    }
+    
+    
+    //为了实现直投监播转发，需要对监播地址进行处理,去掉url后面的1.gpg 1.gif
+    private String dealTrackerUrl(String orign){
+    	return orign.substring(0, orign.lastIndexOf("/"));
+    }
+    
+    
+    /**添加图片MD5
+     * @param imgUrlArray
+     * @param adm
+     */
+    private void handleMd5(String imgUrlArray, AdmVO adm){
+    	List<String> imgUrls = Arrays.asList(StringUtils.split(imgUrlArray, ","));
+    	
+    	List<String> urlList = new ArrayList<String>();
+    	List<String> md5List = new ArrayList<String>();
+    	
+    	for(String url : imgUrls){
+    		//若有md5
+    		String md5 =imageMd5Service.getUrlMd5(url);
+    		if(StringUtils.isNotEmpty(md5)){
+    			urlList.add(url);
+    			md5List.add(md5);
+    		}else{
+    			ImageUrlQueue.addUrl(url);
+    		}
+    	}
+		
+		adm.setImgurl(urlList);
+        adm.setImgmd5(md5List);
+	}
+}

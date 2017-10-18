@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:util="http://www.springframework.org/schema/util"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans     
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd    
+            http://www.springframework.org/schema/context    
+            http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+            http://www.springframework.org/schema/util   
+            http://www.springframework.org/schema/util/spring-util-3.0.xsd">  
+
+		<context:annotation-config/>
+	    <context:property-placeholder location="classpath:*.properties" />  
+
+	    <util:properties id="redis_config" 	 			location="classpath:redis_config.properties"/> 
+	    <util:properties id="tracker_config" 			location="classpath:tracker_config.properties"/>
+	    <util:properties id="debug_config"   		 	location="classpath:debug_config.properties"/>   
+	    <util:properties id="rbi_config"     			location="classpath:RBIClosed.properties"/>
+	    <util:properties id="anti_cheating_config"      location="classpath:anti-cheating.properties"/> 
+	    <util:properties id="baidu_config"      		location="classpath:baidu.properties"/> 
+	    <util:properties id="adx_config"      			location="classpath:adx_config.properties"/>
+	    <util:properties id="sdk_config"      			location="classpath:sdk_config.properties"/>  
+	    <util:properties id="ad_flow_config"      		location="classpath:ad_flow.properties"/> 
+	    <util:properties id="es_config"      			location="classpath:es_config.properties"/>
+	    <util:properties id="ad_timeout_config"      	location="classpath:timeout.properties"/> 
+	    <util:properties id="const_config"      		location="classpath:const.properties"/>              
+	 
+	 	<!-- ssp redis conf -->
+	    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		     <property name="maxTotal" value="2000"></property>
+		     <property name="maxIdle" value="500"></property>
+		     <property name="maxWaitMillis" value="20"></property>
+		     <property name="testOnBorrow" value="true"></property>
+	    </bean>
+	    
+	    <util:list id="jedisHostsList">
+			<value>${ssp_redis1}</value>
+		</util:list>
+		
+	     <bean id="jedisConnectionFactoryManager" class="com.gionee.common.redis.factory.JedisConnectionFactoryManager">
+		      <property name="poolConfig" 	 ref="jedisPoolConfig"></property>
+		      <property name="maxReTryTimes" value="${maxRetry}"></property>
+		      <property name="hosts_list"    ref="jedisHostsList"></property> 
+	     </bean>
+	     
+	     <!-- dmp redis conf -->
+	    <util:list id="dmpJedisHostsList">
+			<value>${dmp_redis1}</value>
+		</util:list>
+		
+	     <bean id="dmpJedisConnectionFactoryManager" class="com.gionee.common.redis.factory.DmpJedisConnectionFactoryManager">
+		      <property name="poolConfig" 	 ref="jedisPoolConfig"></property>
+		      <property name="maxReTryTimes" value="${maxRetry}"></property>
+		      <property name="password" 	 value="${redis_dmp_auth}"></property>
+		      <property name="hosts_list"    ref="dmpJedisHostsList"></property> 
+	     </bean>
+	     
+	     
+	     <util:map id="es_settingsMap" map-class="java.util.HashMap" >
+			<entry key="cluster.name" value="${cluster.name}"/>
+			<entry key="client.transport.sniff" value="${client.transport.sniff}"/>
+			<entry key="name" value="${name}"/>
+		 </util:map>
+	     
+	    <bean id="esClient" class="com.gionee.ssp.service.es.esclient.ESClient" >
+	    	<property name="settingsMap" 	 ref="es_settingsMap"></property>
+	    	<property name="esHostAndPorts"  value="${es.hostandports}"></property>
+		</bean>
+	     
+	     <import resource="params-beans.xml"/>
+</beans>  

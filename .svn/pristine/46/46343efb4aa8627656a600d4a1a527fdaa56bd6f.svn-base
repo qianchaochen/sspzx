@@ -1,0 +1,21 @@
+package com.gionee.ssp.constant;
+
+/**
+ * 
+ * @ClassName SDKInteractionType
+ * @Desc {sdk广告交互类型定义}
+ * @author zhengk
+ * @date 2017年9月25日
+ */
+public enum SDKInteractionType {
+	NO_ACTION,//0无动作
+	WEB,//1网页打开
+	DOWNLOAD,//2直接下载
+	RESERVED,//3保留
+	APP_WAKE,//4应用唤醒
+	CARD,//5卡片打开
+	JUMP_APPSTORE_GAMEHALL;//6跳转游戏大厅
+	public int value() {
+		return this.ordinal();
+	}
+}
