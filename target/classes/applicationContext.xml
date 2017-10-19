@@ -61,6 +61,10 @@
 			<entry key="cluster.name" value="${cluster.name}"/>
 			<entry key="client.transport.sniff" value="${client.transport.sniff}"/>
 			<entry key="name" value="${name}"/>
+			<entry key="processors" value="${processors}"/>
+			<entry key="threadpool.search.type" value="${threadpool.search.type}"/>
+			<entry key="threadpool.search.size" value="${threadpool.search.size}"/>
+			<entry key="threadpool.search.queue_size" value="${threadpool.search.queue_size}"/>
 		 </util:map>
 	     
 	    <bean id="esClient" class="com.gionee.ssp.service.es.esclient.ESClient" >
