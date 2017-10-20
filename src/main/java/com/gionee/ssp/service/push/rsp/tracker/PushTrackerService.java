@@ -21,6 +21,6 @@ public interface PushTrackerService {
 	 * @param requestId
 	 * @param impId
 	 */
-	public void getTrackerInfo(CampaignVO vo, Ad.Builder adBuilder,SdkRequestVO req,QueryVO queryVO,String requestId,int impId);
+	public void getTrackerInfo(CampaignVO vo, Ad.Builder adBuilder,SdkRequestVO req,QueryVO queryVO,String requestId,int impId) throws Exception;
 
 }
