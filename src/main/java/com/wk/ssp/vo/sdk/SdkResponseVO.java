@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.gionee.common.vo.BaseVo;
 import com.wk.ssp.mvc.Constant;
+import com.wk.ssp.vo.FillFloatVo;
 
 /**
  * @description:sdk响应字段
@@ -54,6 +55,15 @@ public class SdkResponseVO extends BaseVo{
 	private int show_ad_times_one_day;
 	//单个用户看到两次广告之间的时间间隔，以分钟为单位。默认值0，表示不限制。（注：以广告请求返回数为准。）
 	private int show_ad_interval;
+
+	/**浮标广告*/
+	private FillFloatVo floatVo;
+
+	/**浮标广告可配置该广告位触发后，延迟多久请求广告。精确到秒。默认不延迟。*/
+	private int delayShow;
+
+	/**定时关闭，默认为0：不关闭；可配置该广告位展示广告多久之后自动消失。精确到秒。*/
+	private int setTimeOut;
 
 	public int getSwich() {
 		return swich;
@@ -175,4 +185,27 @@ public class SdkResponseVO extends BaseVo{
 		this.show_ad_interval = show_ad_interval;
 	}
 
+	public FillFloatVo getFloatVo() {
+		return floatVo;
+	}
+
+	public void setFloatVo(FillFloatVo floatVo) {
+		this.floatVo = floatVo;
+	}
+
+	public int getDelayShow() {
+		return delayShow;
+	}
+
+	public void setDelayShow(int delayShow) {
+		this.delayShow = delayShow;
+	}
+
+	public int getSetTimeOut() {
+		return setTimeOut;
+	}
+
+	public void setSetTimeOut(int setTimeOut) {
+		this.setTimeOut = setTimeOut;
+	}
 }

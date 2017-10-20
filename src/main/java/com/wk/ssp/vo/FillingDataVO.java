@@ -91,14 +91,17 @@ public class FillingDataVO extends BaseVo{
 	//106增加功能，应用分发广告的打开方式   1：h5 落地页  2：直接下载，5：下载卡片，6：跳转游戏大厅、应用商店
 	private int jump_type;
 
-
 	/**用户一天内看到广告的次数*/
 	private int show_ad_times_one_day;
 
 	/**两次广告的时间间隔*/
 	private int show_ad_interval;
-	
-	private List<String> bModels; // 该广告位屏蔽的机型
+
+	/**该广告位屏蔽的机型*/
+	private List<String> bModels;
+
+	/**浮标广告*/
+	private FillFloatVo floatVo;
 
 	public String getApp_name() {
 		return app_name;
@@ -330,5 +333,13 @@ public class FillingDataVO extends BaseVo{
 
 	public void setbModels(List<String> bModels) {
 		this.bModels = bModels;
+	}
+
+	public FillFloatVo getFloatVo() {
+		return floatVo;
+	}
+
+	public void setFloatVo(FillFloatVo floatVo) {
+		this.floatVo = floatVo;
 	}
 }

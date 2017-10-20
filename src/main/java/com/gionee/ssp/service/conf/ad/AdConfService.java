@@ -1,5 +1,6 @@
 package com.gionee.ssp.service.conf.ad;
 
+import com.gionee.ssp.vo.FloatAdConfigVo;
 import com.gionee.ssp.vo.SSPAdShieldConfigVo;
 import com.wk.ssp.vo.FillingDataVO;
 import com.wk.ssp.vo.sdk.SdkRequestVO;
@@ -37,5 +38,14 @@ public interface AdConfService {
 	 * @date 2017年8月15日 上午11:10:00 
 	 */
 	public SSPAdShieldConfigVo getAdShieldCfg(String key) throws Exception;
+
+	/**
+	 * 获取浮标广告配置信息
+	 * @param key
+	 * @return
+	 * @throws Exception
+	 * @author
+	 */
+	public FloatAdConfigVo getFloatAdCfg(String key) throws Exception;
 
 }

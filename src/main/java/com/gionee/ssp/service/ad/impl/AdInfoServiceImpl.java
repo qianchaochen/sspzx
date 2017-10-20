@@ -32,6 +32,9 @@ public class AdInfoServiceImpl implements AdInfoService {
 		if(0 != vo.getInstl()){
 			return CommonConstant.SDK_AD_TYPE.INSERT_SCREEN.getValue();
 		}
+		if (null != vo.getFloatVo()) {
+			return CommonConstant.SDK_AD_TYPE.FLOAT_AD.getValue();
+		}
 		return CommonConstant.SDK_AD_TYPE.BANNER.getValue();
 	}
 	

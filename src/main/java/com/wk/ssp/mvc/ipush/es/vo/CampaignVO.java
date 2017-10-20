@@ -14,7 +14,7 @@ public class CampaignVO {
     private int campaign_target; // 活动目标。0：无动作，1：网站打开，2：下载
     private String imptracker; // 广告主展示监播
     private String clktracker; // 广告主点击监播
-    private int ad_type; // 广告形式：1、横幅, 2：插屏, 3: 开屏, 4:原生
+    private int ad_type; // 广告形式：1、横幅, 2：插屏, 3: 开屏, 4:原生，5：浮标
     private String landing_url; // 落地页URL或下载链接
     private String bundle; // 下载类活动APP包名
     private int priority; // 优先级

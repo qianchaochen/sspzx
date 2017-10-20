@@ -113,7 +113,8 @@ public class CommonConstant {
 		BANNER(1, "横幅"), 
 		SPLASH_SCREEN(2, "开屏"),
 		INSERT_SCREEN(3, "插屏"),
-		NATIVE(4, "原生广告");
+		NATIVE(4, "原生广告"),
+		FLOAT_AD(5, "浮标广告");
 
 		int value;
 		String desc;
@@ -142,7 +143,8 @@ public class CommonConstant {
 		BANNER(1, "横幅"), 
 		INSERT_SCREEN(2, "插屏"),
 		SPLASH_SCREEN(3, "开屏"),
-		NATIVE(4, "原生广告");
+		NATIVE(4, "原生广告"),
+		FLOAT_AD(5, "浮标广告");
 
 		int value;
 		String desc;

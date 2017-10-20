@@ -1,5 +1,6 @@
 package com.gionee.ssp.service.conf.ad.impl;
 
+import com.gionee.ssp.vo.FloatAdConfigVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,5 +57,11 @@ public class AdConfServiceImpl implements AdConfService {
 	public SSPAdShieldConfigVo getAdShieldCfg(String key) throws Exception {
 		String json = redisService.query(key);
 		return JsonUtils.readJson2Object(json, SSPAdShieldConfigVo.class);
+	}
+
+	@Override
+	public FloatAdConfigVo getFloatAdCfg(String key) throws Exception {
+		String json = redisService.query(key);
+		return JsonUtils.readJson2Object(json, FloatAdConfigVo.class);
 	}
 }

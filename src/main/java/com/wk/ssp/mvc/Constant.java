@@ -28,6 +28,9 @@ public class Constant {
 	
 	/**SSP平台广告屏蔽配置KEY**/
 	public static final String SSP_AD_SHIELD_CFG = "AD_SHIELD_CFG";
+
+	/**SSP平台浮标广告配置的*/
+	public static final String SSP_FLOAT_AD_CFG = "FLOAT_AD_CFG";
 	
 	/** redis存储流量分配比例键值常量 **/
 	public static final String PERCNET_KEY = "wk_SSP_percent";
