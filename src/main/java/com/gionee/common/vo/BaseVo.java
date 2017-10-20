@@ -10,6 +10,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * 2017年3月23日
  */
 public class BaseVo {
+	
 	public String toString(){
 		try{
 			return ToStringBuilder.reflectionToString(this,ToStringStyle.MULTI_LINE_STYLE);
