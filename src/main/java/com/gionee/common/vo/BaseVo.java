@@ -11,7 +11,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 public class BaseVo {
 	
-	
+
 	public String toString(){
 		try{
 			return ToStringBuilder.reflectionToString(this,ToStringStyle.MULTI_LINE_STYLE);
