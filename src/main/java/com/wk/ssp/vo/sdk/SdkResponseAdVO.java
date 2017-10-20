@@ -15,7 +15,7 @@ public class SdkResponseAdVO extends BaseVo {
 	/** 广告位ID **/
 	private String adslot_id;
 	/**
-	 *广告类型。1:横幅，2: 开屏，3: 插屏，4：原生 
+	 *广告类型。1:横幅，2: 开屏，3: 插屏，4：原生，5：浮标
 	 */
 	private int ad_type;
 

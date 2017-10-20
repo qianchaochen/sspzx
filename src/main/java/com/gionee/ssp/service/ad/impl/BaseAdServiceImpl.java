@@ -1,5 +1,6 @@
 package com.gionee.ssp.service.ad.impl;
 
+import com.gionee.ssp.service.floatad.FloatAdService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gionee.ssp.service.ad.AdInfoService;
@@ -55,4 +56,9 @@ public class BaseAdServiceImpl {
     @Autowired
     PushAdService pushAdService;
 
+    /**
+     * 浮标广告服务层
+     */
+    @Autowired
+    FloatAdService floatAdService;
 }

@@ -71,6 +71,8 @@ public class AdServiceImpl extends BaseAdServiceImpl implements AdService {
 		}
 		WKLogManager.getLOG().addReqAdLog("ipush", String.valueOf(vo.getIs_ipush()));
 
+		//浮标广告处理
+		floatAdService.domainFilter(vo, req, rsp);
 		// 设置返回信息
 		// 版本根据sdk版本控制clkurl，并且设置interaction_type
 		// 如果是1.7.7以上版本，则当交互类型是应用分发（2）时，根据设置的子类型重新设定interaction_type
