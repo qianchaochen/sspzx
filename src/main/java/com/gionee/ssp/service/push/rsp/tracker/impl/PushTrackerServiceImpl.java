@@ -25,11 +25,12 @@ public class PushTrackerServiceImpl extends BaseTrackerServiceImpl implements Pu
 	private String demo_package_name="com.gionee.ad.demo";
 	
 	@Override
-	public void getTrackerInfo(CampaignVO vo, Ad.Builder adBuilder,SdkRequestVO req,QueryVO queryVO,String requestId,int impId){
+	public void getTrackerInfo(CampaignVO vo, Ad.Builder adBuilder,SdkRequestVO req,QueryVO queryVO,String requestId,int impId) throws Exception{
         int campaign_id = vo.getCampaign_id();
+        
 		// 展示监播
         if (!StringUtils.isBlank(vo.getImptracker())) {
-            adBuilder.addImptrackers( MacroSubstituionUtils.macroSubstitutionMMA(vo.getImptracker(), queryVO));
+            adBuilder.addImptrackers( MacroSubstituionUtils.macroSubstitutionMMA(vo.getImptracker(), req, queryVO, vo.getClktracker_from()));
         }
 
         if(!this.demo_package_name.equals(vo.getBundle())){
@@ -40,7 +41,7 @@ public class PushTrackerServiceImpl extends BaseTrackerServiceImpl implements Pu
            
         // 点击监播
         if (!StringUtils.isBlank(vo.getClktracker())) {
-            adBuilder.addClktrackers(MacroSubstituionUtils.macroSubstitutionMMA(vo.getClktracker(), queryVO));
+            adBuilder.addClktrackers(MacroSubstituionUtils.macroSubstitutionMMA(vo.getClktracker(), req, queryVO, vo.getClktracker_from()));
         }
         if(!this.demo_package_name.equals(vo.getBundle())){
             String clickUrl = GeneratorUtils.generateDetecting(this.dealTrackerUrl(this.click_tracker_url), req,

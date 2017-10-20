@@ -29,6 +29,8 @@ public class CampaignVO {
     private CreativeVO[] creatives; // 创意
     private int item_type; // 广告类型，1：信息流组图，2：信息流小图 3：信息流大图,4:图片,5:图文
     private int mode;  //直投交易模式
+    
+    private int clktracker_from;	//直投广告来源, 默认是金立的广告:0, 阿里的广告:1
 
     public int getCampaign_id() {
         return campaign_id;
@@ -235,6 +237,14 @@ public class CampaignVO {
 
 	public void setMode(int mode) {
 		this.mode = mode;
+	}
+
+	public int getClktracker_from() {
+		return clktracker_from;
+	}
+
+	public void setClktracker_from(int clktracker_from) {
+		this.clktracker_from = clktracker_from;
 	}
 
 }
