@@ -34,7 +34,7 @@ public class TestQueryRedisAction extends TestBaseAction{
 		if(!"local".equals(this.env)){
 			this.setEnv(env);
 		}else{
-			this.setEnv("test");
+			this.setEnv("product");
 		}
 		String url=this.getUrl();
 		
@@ -43,8 +43,8 @@ public class TestQueryRedisAction extends TestBaseAction{
 		
 		Map<String,String> jsonBody = new HashMap<String,String>();
 		
-		jsonBody.put("redis_server_name", "ssp");
-		jsonBody.put("key", "wk_ssp_count_queue_list");
+		jsonBody.put("redis_server_name", "dsp");
+		jsonBody.put("key", "WK_DSP_DSP_SYS_CFG_COMMISSION_RATE");
 		//jsonBody.put("key", "wk_SSP_"+app_id+"_"+adslot_id);
 		jsonReq.put("body", jsonBody);
 		
